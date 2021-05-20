@@ -1,7 +1,9 @@
-package sample;
+package com.model.da;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 /**
  * Created by Maryam Askari
@@ -12,6 +14,7 @@ import java.sql.DriverManager;
 public class DatabaseConnection {
 
     public Connection databaseLink;
+    private PreparedStatement preparedStatement;
 
     public Connection getConnection() {
         String databaseUser="maryam";
@@ -27,5 +30,9 @@ public class DatabaseConnection {
             e.getCause();
         }
         return databaseLink;
+    }
+
+    public void close() throws SQLException {
+        databaseLink.close();
     }
 }
