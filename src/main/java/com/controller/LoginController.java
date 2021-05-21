@@ -55,6 +55,8 @@ public class LoginController implements Initializable {
             //validateLogin();
             PersonDAOImpl personDAO = new PersonDAOImpl();
             Person person = personDAO.selectValidPerson(userName, password);
+            Main main = new Main();
+            main.shoeTableView();
 
             if (person.getUserName().equals(userName) && person.getPassword().equals(password)){
                 loginMessageLabel.setText("congratulation!");
@@ -82,7 +84,7 @@ public class LoginController implements Initializable {
         lockImageView.setImage(lockImage);
     }
 
-    public void validateLogin() { // To connect to my DB
+    /*public void validateLogin() { // To connect to my DB
 
         String password = PasswordSecurity.shaHashing(enterPasswordField.getText());
 
@@ -110,6 +112,8 @@ public class LoginController implements Initializable {
             e.getCause();
         }
     }
+
+     */
 
 
     public void creatAccountForm() {
