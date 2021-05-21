@@ -49,8 +49,7 @@ public class LoginController implements Initializable {
 
     public void loginButtonOnAction(ActionEvent event) { // the Login Button and its action
         String userName = usernameTextField.getText();
-        //String password = PasswordSecurity.shaHashing(enterPasswordField.getText());
-        String password = enterPasswordField.getText();
+        String password = PasswordSecurity.shaHashing(enterPasswordField.getText());
 
         if (!usernameTextField.getText().isBlank() && !enterPasswordField.getText().isBlank()) {
             //validateLogin();
@@ -114,23 +113,8 @@ public class LoginController implements Initializable {
 
 
     public void creatAccountForm() {
-        try {
-            // Parent root = FXMLLoader.load(getClass().getResource("/resources/register.fxml"));
-
-
-            Main.getStage().close();
-
-            FXMLLoader loader = new FXMLLoader(new File("D:\\Java_Home(training)\\shoeLogin\\src\\main\\resources\\register.fxml").toURI().toURL());
-            Parent root = loader.load();
-            Stage registerStage = new Stage();
-            registerStage = new Stage();
-            registerStage.setTitle("Login page");
-            registerStage.setScene(new Scene(root, 520, 567));
-            registerStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-            e.getCause();
-        }
+        Main main = new Main();
+        main.registerStage();
     }
 
 
