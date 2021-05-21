@@ -15,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import com.model.da.DatabaseConnection;
+import sample.Main;
 import sample.PasswordSecurity;
 
 import java.io.File;
@@ -71,6 +72,8 @@ public class RegisterController implements Initializable {
             registerUser();
             confirmedPasswordLabel.setText("Password is set!");
             registrationMessageLabel.setText("User has been registered successfully!");
+            Main main = new Main();
+            main.shoeTableView();
         } else {
             confirmedPasswordLabel.setText("Password does not match!");
         }
