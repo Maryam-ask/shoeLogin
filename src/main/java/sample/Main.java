@@ -55,4 +55,22 @@ public class Main extends Application {
             e.getCause();
         }
     }
+
+    public void shoeTableView(){
+        try {
+            stage.close();
+
+            FXMLLoader loader = new FXMLLoader(new File("D:\\Java_Home(training)\\shoeLogin\\src\\main\\resources\\shoesTable.fxml").toURI().toURL());
+            Parent root = loader.load();
+            stage = new Stage();
+            stage.setTitle("Login page");
+            stage.setScene(new Scene(root, 520, 600));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+
+    }
 }
