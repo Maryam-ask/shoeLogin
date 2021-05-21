@@ -46,7 +46,7 @@ public class Main extends Application {
             FXMLLoader loader = new FXMLLoader(new File("D:\\Java_Home(training)\\shoeLogin\\src\\main\\resources\\register.fxml").toURI().toURL());
             Parent root = loader.load();
             stage = new Stage();
-            stage.setTitle("Login page");
+            stage.setTitle("registering page");
             stage.setScene(new Scene(root, 520, 600));
             stage.show();
 
@@ -63,7 +63,7 @@ public class Main extends Application {
             FXMLLoader loader = new FXMLLoader(new File("D:\\Java_Home(training)\\shoeLogin\\src\\main\\resources\\shoesTable.fxml").toURI().toURL());
             Parent root = loader.load();
             stage = new Stage();
-            stage.setTitle("Login page");
+            stage.setTitle("List of shoes page");
             stage.setScene(new Scene(root, 520, 600));
             stage.show();
 
