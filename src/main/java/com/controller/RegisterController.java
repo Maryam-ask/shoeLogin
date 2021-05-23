@@ -37,8 +37,6 @@ public class RegisterController implements Initializable {
     @FXML
     private ImageView shieldImageView;
     @FXML
-    private Button closeButton;
-    @FXML
     private Label registrationMessageLabel;
     @FXML
     private Label confirmedPasswordLabel;
@@ -57,16 +55,17 @@ public class RegisterController implements Initializable {
     @FXML
     private PasswordField confirmPasswordField;
 
-    Person person = new Person();
+    private Person person = new Person();
 
 
 
-    public void closeButtonOnAction(ActionEvent event) { // the close button and its action
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        stage.close();
-        Platform.exit();
+    @FXML
+    public void backButtonOnAction(ActionEvent event) throws Exception { // the close button and its action
+        Main main = new Main();
+        main.start(Main.getStage());
     }
 
+    @FXML
     public void registerButtonOnAction(ActionEvent event) {
         if (setPasswordField.getText().equals(confirmPasswordField.getText())) {
             registerUser();
@@ -74,6 +73,7 @@ public class RegisterController implements Initializable {
             registrationMessageLabel.setText("User has been registered successfully!");
             Main main = new Main();
             main.shoeTableView();
+
         } else {
             confirmedPasswordLabel.setText("Password does not match!");
         }
@@ -99,7 +99,14 @@ public class RegisterController implements Initializable {
 
         PersonDAO personDAO = new PersonDAOImpl();
         personDAO.insertRegisteredPerson(person);
+    }
 
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
 
