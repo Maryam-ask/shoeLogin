@@ -7,17 +7,17 @@ package com.model.to;
  * Project: IntelliJ IDEA
  */
 public class Shoe {
-    private int id;
+    private long id;
     private String name;
     private String color;
     private int size;
     private String brand;
     private String type;
-    private String prise;
+    private double prise;
 
     public Shoe(){}
 
-    public Shoe(int id, String name, String color, int size, String brand, String type, String prise) {
+    public Shoe(int id, String name, String color, int size, String brand, String type, double prise) {
         this.id = id;
         this.name = name;
         this.color = color;
@@ -27,11 +27,11 @@ public class Shoe {
         this.prise = prise;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -75,11 +75,11 @@ public class Shoe {
         this.type = type;
     }
 
-    public String getPrise() {
+    public double getPrise() {
         return prise;
     }
 
-    public void setPrise(String prise) {
+    public void setPrise(double prise) {
         this.prise = prise;
     }
 }
