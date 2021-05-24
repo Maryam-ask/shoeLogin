@@ -3,7 +3,10 @@ package com.model.da;
 import com.model.to.Shoe;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Maryam Askari
@@ -20,6 +23,32 @@ public class ShoeDAOImpl implements ShoeDAO{
         preparedStatement.close();
         connection.close();
     }
+
+    @Override
+    public List<Shoe> selectShoes(){
+        List<Shoe> shoeList = new ArrayList<Shoe>();
+        try{
+            preparedStatement = connection.getConnection().prepareStatement("select * from shoe");
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                Shoe shoe= new Shoe();
+                shoe.setId(resultSet.getLong("id"));
+                shoe.setName(resultSet.getString("name"));
+                shoe.setColor(resultSet.getString("color"));
+                shoe.setType(resultSet.getString("shoetype"));
+                shoe.setSize(resultSet.getInt("shoesize"));
+                shoe.setBrand(resultSet.getString("brand"));
+                shoe.setPrise(resultSet.getDouble("prise"));
+            }
+            close();
+        }catch (Exception e){
+            e.getStackTrace();
+            e.getCause();
+        }
+        return shoeList;
+    }
+
 
     @Override
     public void insertShoe(Shoe shoe){
