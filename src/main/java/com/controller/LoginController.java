@@ -44,12 +44,25 @@ public class LoginController implements Initializable {
 
     private Person person ;
 
-
+    /**
+     * A method with function for the cancel button in FX.
+     * It will close the stage if we click on cancel button.
+     * @param event
+     */
     public void cancelButtonOnAction(ActionEvent event) { // the cancel button and its action
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * A method for login button function.
+     * First it will check if the TextFiled are empty or not
+     * and then will select the person with given username and password
+     * and check if this person exist or not.
+     * it will also write some information for user in loginMessageLabel.
+     * @param event
+     * @throws IOException
+     */
     public void loginButtonOnAction(ActionEvent event) throws IOException { // the Login Button and its action
 
         if (!usernameTextField.getText().isBlank() && !enterPasswordField.getText().isBlank()) {
@@ -79,10 +92,20 @@ public class LoginController implements Initializable {
         }
     }
 
+    /**
+     * With clicking on register button it will connect to register stage in Main Class.
+     * @param event
+     */
     public void registerButtonOnAction(ActionEvent event) {
         main.registerStage();;
     }
 
+    /**
+     *  An Override method initialize() which is and abstract method in interface Initializable that we implement in our Class.
+     *  We use this method to shoe our pictures in FX.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {  // For the picture to initiate the images
         File brandingFile = new File("Images/shoeLogo.jpg");
@@ -118,10 +141,19 @@ public class LoginController implements Initializable {
 
     }
 
+    /**
+     * A method to get the declared main object in current Class
+     * @return
+     */
+
     public Main getMain() {
         return main;
     }
 
+    /**
+     * A method to select a main object and add it to the current main object which declared in this Class.
+     * @param main
+     */
     public void setMain(Main main) {
         this.main = main;
     }
