@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controller.ShoesTableContoller">
+<AnchorPane prefHeight="600.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controller.ShoesTableController">
    <children>
       <AnchorPane prefHeight="61.0" prefWidth="520.0" style="-fx-background-color: #ffd2da;">
          <children>
@@ -14,7 +18,32 @@
                   <Image url="@../../../Images/shieldShoeLogo.jpg" />
                </image>
             </ImageView>
+            <Label fx:id="welcomeText" layoutX="86.0" layoutY="38.0" prefHeight="27.0" prefWidth="427.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
+      <TableView fx:id="shoeTableView" layoutX="29.0" layoutY="117.0" prefHeight="422.0" prefWidth="461.0">
+        <columns>
+          <TableColumn fx:id="shoeIdColumn" minWidth="2.666656494140625" prefWidth="38.0" text="ID" />
+          <TableColumn fx:id="shoeNameColumn" prefWidth="71.99996948242188" text="Name" />
+            <TableColumn fx:id="shoeColorColumn" prefWidth="73.3333740234375" text="Color" />
+            <TableColumn fx:id="shoeBrandColumn" prefWidth="66.6666259765625" text="Brand" />
+            <TableColumn fx:id="shoeSizeColumn" prefWidth="63.33331298828125" text="Size" />
+            <TableColumn fx:id="shoeTypeColumn" minWidth="0.0" prefWidth="62.0" text="Type" />
+            <TableColumn fx:id="shoePriseColumn" prefWidth="44.0" text="Prise" />
+            <TableColumn fx:id="selectedCol" prefWidth="40.000020345052064" text="Select" />
+
+        </columns>
+      </TableView>
+      <Label alignment="CENTER" layoutX="77.0" layoutY="82.0" prefHeight="17.0" prefWidth="365.0" text="Shoes Table" textFill="#100651">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="addToBagButton" layoutX="301.0" layoutY="560.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Add to bag" />
+      <Button fx:id="cancelButton" layoutX="50.0" layoutY="560.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="25.0" prefWidth="66.0" text="cancel" />
    </children>
 </AnchorPane>

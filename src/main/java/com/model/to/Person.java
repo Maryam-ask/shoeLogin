@@ -9,7 +9,7 @@ package com.model.to;
 public class Person {
 
     private int id;
-    private String Name;
+    private String name;
     private String family;
     private String userName;
     private String password;
@@ -17,6 +17,19 @@ public class Person {
     private String phone;
     private int age;
     private String role;
+
+    public Person(){}
+
+    public Person(String name, String family, String userName, String password, String address, String phone, int age, String role) {
+        this.name = name;
+        this.family = family;
+        this.userName = userName;
+        this.password = password;
+        this.address = address;
+        this.phone = phone;
+        this.age = age;
+        this.role = role;
+    }
 
     public int getId() {
         return id;
@@ -27,11 +40,11 @@ public class Person {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getFamily() {

@@ -1,5 +1,10 @@
 package com.model.to;
 
+
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.scene.layout.Border;
+
 /**
  * Created by Maryam Askari
  * Date: 5/21/2021
@@ -15,6 +20,18 @@ public class Shoe {
     private String type;
     private double prise;
 
+    private BooleanProperty selectable=new SimpleBooleanProperty(false);
+
+    public boolean getSelectable() {
+        return selectable.get();
+    }
+    public void setSelectable(boolean selectable) {
+        this.selectable.set(selectable);
+    }
+    public BooleanProperty selectableProperty() {
+        return selectable;
+    }
+
     public Shoe(){}
 
     public Shoe(int id, String name, String color, int size, String brand, String type, double prise) {
@@ -25,6 +42,19 @@ public class Shoe {
         this.brand = brand;
         this.type = type;
         this.prise = prise;
+
+        this.selectable =new SimpleBooleanProperty(false);
+    }
+
+    public Shoe(long id, String name, String color, int size, String brand, String type, double prise, BooleanProperty selectable) {
+        this.id = id;
+        this.name = name;
+        this.color = color;
+        this.size = size;
+        this.brand = brand;
+        this.type = type;
+        this.prise = prise;
+        this.selectable = selectable;
     }
 
     public long getId() {
@@ -82,4 +112,5 @@ public class Shoe {
     public void setPrise(double prise) {
         this.prise = prise;
     }
+
 }

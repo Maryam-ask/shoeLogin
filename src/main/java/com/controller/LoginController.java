@@ -1,8 +1,8 @@
 package com.controller;
 
-import com.model.da.PersonDAO;
 import com.model.da.PersonDAOImpl;
 import com.model.to.Person;
+import com.model.to.PersonProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,11 +42,14 @@ public class LoginController implements Initializable {
     @FXML
     private PasswordField enterPasswordField;
 
-    private Person person ;
+    private Person person;
+
+    private PersonProperty personProperty;
 
     /**
      * A method with function for the cancel button in FX.
      * It will close the stage if we click on cancel button.
+     *
      * @param event
      */
     public void cancelButtonOnAction(ActionEvent event) { // the cancel button and its action
@@ -60,6 +63,7 @@ public class LoginController implements Initializable {
      * and then will select the person with given username and password
      * and check if this person exist or not.
      * it will also write some information for user in loginMessageLabel.
+     *
      * @param event
      * @throws IOException
      */
@@ -74,19 +78,22 @@ public class LoginController implements Initializable {
             PersonDAOImpl personDAO = new PersonDAOImpl();
             person = personDAO.selectValidPerson(userName, password);
 
-            if (person !=null){
+            if (usernameTextField.getText().equals(person.getUserName()) && password.equals(person.getPassword())) {
+                if (person != null) {
 
-                loginMessageLabel.setText("congratulation!");
-                // Go to Shoes Table Page
+                    loginMessageLabel.setText("congratulation!");
+                    // Go to Shoes Table Page
+                    if (person.getRole().equals("Customer")){
+                    //Main.getStage().getScene().setUserData(person);
+                        getMain().shoeTableView(person);
+                    }else if(person.getRole().equals("Admin")){
+                        getMain().adminPageStage(person);
+                    }
 
-                //Main.getStage().getScene().setUserData(person);
-                getMain().shoeTableView(person);
-
-
-            }else {
+                }
+            } else {
                 loginMessageLabel.setText("Invalid login. Please try again");
             }
-
         } else {
             loginMessageLabel.setText("Please enter username and password");
         }
@@ -94,15 +101,17 @@ public class LoginController implements Initializable {
 
     /**
      * With clicking on register button it will connect to register stage in Main Class.
+     *
      * @param event
      */
     public void registerButtonOnAction(ActionEvent event) {
-        main.registerStage();;
+        main.registerStage();
     }
 
     /**
-     *  An Override method initialize() which is and abstract method in interface Initializable that we implement in our Class.
-     *  We use this method to shoe our pictures in FX.
+     * An Override method initialize() which is and abstract method in interface Initializable that we implement in our Class.
+     * We use this method to shoe our pictures in FX.
+     *
      * @param url
      * @param resourceBundle
      */
@@ -121,6 +130,7 @@ public class LoginController implements Initializable {
     /**
      * When this method called, it will pass the selected person object to
      * the detailed view
+     *
      * @param event
      * @throws IOException
      */
@@ -134,7 +144,7 @@ public class LoginController implements Initializable {
         //ShoesTableController controller = loader.getController(); // access the controller in that file
         //controller.initData(getPerson());
 
-        Stage window =(Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(loginViewScene);
         window.show();
 
@@ -143,6 +153,7 @@ public class LoginController implements Initializable {
 
     /**
      * A method to get the declared main object in current Class
+     *
      * @return
      */
 
@@ -152,6 +163,7 @@ public class LoginController implements Initializable {
 
     /**
      * A method to select a main object and add it to the current main object which declared in this Class.
+     *
      * @param main
      */
     public void setMain(Main main) {

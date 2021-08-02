@@ -2,9 +2,8 @@ package com.model.da;
 
 import com.model.to.Shoe;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,13 +32,14 @@ public class ShoeDAOImpl implements ShoeDAO{
 
             while (resultSet.next()){
                 Shoe shoe= new Shoe();
-                shoe.setId(resultSet.getLong("id"));
-                shoe.setName(resultSet.getString("name"));
-                shoe.setColor(resultSet.getString("color"));
-                shoe.setType(resultSet.getString("shoetype"));
-                shoe.setSize(resultSet.getInt("shoesize"));
-                shoe.setBrand(resultSet.getString("brand"));
-                shoe.setPrise(resultSet.getDouble("prise"));
+                shoe.setId(resultSet.getLong("ID"));
+                shoe.setName(resultSet.getString("NAME"));
+                shoe.setColor(resultSet.getString("COLOR"));
+                shoe.setType(resultSet.getString("SHOETYPE"));
+                shoe.setSize(resultSet.getInt("SHOESIZE"));
+                shoe.setBrand(resultSet.getString("BRAND"));
+                shoe.setPrise(resultSet.getDouble("PRISE"));
+                shoeList.add(shoe);
             }
             close();
         }catch (Exception e){
@@ -88,6 +88,5 @@ public class ShoeDAOImpl implements ShoeDAO{
         }
 
     }
-
 
 }

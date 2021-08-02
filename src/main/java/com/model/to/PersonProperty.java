@@ -3,6 +3,8 @@ package com.model.to;
 
 import javafx.beans.property.*;
 
+import java.util.Objects;
+
 /**
  * Created by Maryam Askari
  * Date: 5/31/2021
@@ -11,14 +13,15 @@ import javafx.beans.property.*;
  */
 public class PersonProperty {
 
-    private final IntegerProperty id = new SimpleIntegerProperty();
-    private final StringProperty name = new SimpleStringProperty();
-    private final StringProperty family = new SimpleStringProperty();
-    private final StringProperty userName = new SimpleStringProperty();
-    private final StringProperty password = new SimpleStringProperty();
-    private final StringProperty address = new SimpleStringProperty();
-    private final StringProperty phone = new SimpleStringProperty();
-    private final IntegerProperty age = new SimpleIntegerProperty();
+    private IntegerProperty id = new SimpleIntegerProperty();
+    private StringProperty name = new SimpleStringProperty();
+    private StringProperty family = new SimpleStringProperty();
+    private StringProperty userName = new SimpleStringProperty();
+    private StringProperty password = new SimpleStringProperty();
+    private StringProperty address = new SimpleStringProperty();
+    private StringProperty phone = new SimpleStringProperty();
+    private IntegerProperty age = new SimpleIntegerProperty();
+    private StringProperty role = new SimpleStringProperty();
 
     public int getId() {
         return idProperty().get();
@@ -115,4 +118,18 @@ public class PersonProperty {
     public void setAge(int age) {
         ageProperty().set(age);
     }
+
+    public String getRole() {
+        return roleProperty().get();
+    }
+
+    public StringProperty roleProperty() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        roleProperty().set(role);
+    }
+
+    
 }

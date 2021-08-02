@@ -2,20 +2,25 @@ package com.controller;
 
 import com.model.da.PersonDAO;
 import com.model.da.PersonDAOImpl;
+import com.model.dto.ConvertDTO;
 import com.model.to.Person;
+import com.model.to.PersonProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import sample.Main;
 import sample.PasswordSecurity;
 
+
+
+
 import java.io.File;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ResourceBundle;
 
 
@@ -30,6 +35,8 @@ public class RegisterController implements Initializable {
     private Main main;
     @FXML
     private ImageView shieldImageView;
+    @FXML
+    private DatePicker birthdayDatePicker;
     @FXML
     private Label registrationMessageLabel;
     @FXML
@@ -48,8 +55,13 @@ public class RegisterController implements Initializable {
     private PasswordField setPasswordField;
     @FXML
     private PasswordField confirmPasswordField;
+    @FXML
+    private RadioButton customerButton;
+    @FXML
+    private RadioButton adminButton;
 
     private Person person;
+
 
     /**
      * a method to return Main object which declared in current Class.
@@ -93,8 +105,11 @@ public class RegisterController implements Initializable {
             confirmedPasswordLabel.setText("Password is set!");
             registrationMessageLabel.setText("User has been registered successfully!");
             //Main main = new Main();
-            main.shoeTableView(person);//TODO set person object
-
+            if(person.getRole().equals("Customer")) {
+                getMain().shoeTableView(getPerson());//TODO set person object
+            }else if (person.getRole().equals("Admin")){
+                getMain().adminPageStage(getPerson());
+            }
 
         } else {
             confirmedPasswordLabel.setText("Password does not match!");
@@ -120,17 +135,24 @@ public class RegisterController implements Initializable {
      * and add this information to person Object
      * and insert person to the database with PersonDAO object and method insertRegisteredPerson(Person).
      */
-    public void registerUser() {
-        person.setId(0);
+    public void registerUser() { // inja bayad PersonProperty vared beshe va bad be Person mapping beshe
+        person = new Person();
+
         person.setName(firstNameTextField.getText());
         person.setFamily(lastNameTextField.getText());
         person.setUserName(usernameTextField.getText());
         person.setPassword(PasswordSecurity.shaHashing(setPasswordField.getText()));
         person.setPhone(phoneNumberTextField.getText());
         person.setAddress(addressTextField.getText());
+        //TODO if bithdate != null
+
+        person.setAge(getBirthdayDateToAge());
+        person.setRole(getRole());
+
 
         PersonDAO personDAO = new PersonDAOImpl();
         personDAO.insertRegisteredPerson(person);
+
     }
 
     /**
@@ -147,6 +169,33 @@ public class RegisterController implements Initializable {
      */
     public void setPerson(Person person) {
         this.person = person;
+    }
+
+    /**
+     * A method to get the person's birthday date and return the age of the person
+     * @return int age of the person
+     */
+    public int getBirthdayDateToAge(){
+        LocalDate birthDay = birthdayDatePicker.getValue();
+        LocalDate nowDate = LocalDate.now();
+
+        int age = Period.between(birthDay,nowDate).getYears();
+        return age;
+    }
+
+    /**
+     * A method to get role from selected RadioButton
+     * @return String
+     */
+    @FXML
+    public String getRole(){
+        String role="";
+        if(customerButton.isSelected()){
+            role = "Customer";
+        }else if (adminButton.isSelected()){
+            role = "Admin";
+        }
+        return role;
     }
 
 

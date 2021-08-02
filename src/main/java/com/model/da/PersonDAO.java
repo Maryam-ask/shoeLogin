@@ -10,5 +10,5 @@ import com.model.to.Person;
  */
 public interface PersonDAO {
     public Person selectValidPerson(String userName, String password);
-    public void insertRegisteredPerson(Person person);
+    public int insertRegisteredPerson(Person person);
 }

@@ -2,8 +2,8 @@ package com.model.da;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
 
 /**
  * Created by Maryam Askari
@@ -14,18 +14,18 @@ import java.sql.SQLException;
 public class DatabaseConnection {
 
     public Connection databaseLink;
-    private PreparedStatement preparedStatement;
+    //private PreparedStatement preparedStatement;
 
     public Connection getConnection() {
-        String databaseUser="maryam";
-        String databasePassword = "myjava123";
+        String databaseUser = "maryam";
+        String databasePassword = "myjava12345";
         String url = "jdbc:oracle:thin:@localhost:1521:xe";
 
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            databaseLink = DriverManager.getConnection(url,databaseUser,databasePassword);
+            databaseLink = DriverManager.getConnection(url, databaseUser, databasePassword);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             e.getCause();
         }
@@ -35,4 +35,5 @@ public class DatabaseConnection {
     public void close() throws SQLException {
         databaseLink.close();
     }
+
 }

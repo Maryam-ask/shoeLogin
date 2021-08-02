@@ -17,6 +17,10 @@ public class ShoeProperty {
     private final StringProperty type = new SimpleStringProperty();
     private final DoubleProperty prise = new SimpleDoubleProperty();
 
+    private BooleanProperty selectable=new SimpleBooleanProperty(false);
+
+
+
     public long getId() {
         return idProperty().get();
     }
@@ -99,5 +103,17 @@ public class ShoeProperty {
 
     public void setPrise(double prise) {
         priseProperty().set(prise);
+    }
+
+    public boolean isSelectable() {
+        return selectableProperty().get();
+    }
+
+    public BooleanProperty selectableProperty() {
+        return selectable;
+    }
+
+    public void setSelectable(boolean selectable) {
+        selectableProperty().set(selectable);
     }
 }

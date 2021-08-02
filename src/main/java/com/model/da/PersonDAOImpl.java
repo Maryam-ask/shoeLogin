@@ -1,10 +1,7 @@
 package com.model.da;
 
 import com.model.to.Person;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * Created by Maryam Askari
@@ -30,13 +27,16 @@ public class PersonDAOImpl implements PersonDAO {
      */
     @Override
     public Person selectValidPerson(String userName, String password) {
+        Person person = new Person();
 
         try {
-            preparedStatement = connection.getConnection().prepareStatement("select * from person where username='" + userName + "'and password ='" + password + "'");
+            preparedStatement = connection.getConnection().prepareStatement
+                    ("select * from person where username='" + userName + "'and password ='" + password + "'");
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()) {
-                Person person = new Person();
+            if (resultSet.next()) {
+
+                person.setId(resultSet.getInt("id"));
                 person.setName(resultSet.getString("name"));
                 person.setFamily(resultSet.getString("family"));
                 person.setUserName(resultSet.getString("username"));
@@ -44,19 +44,19 @@ public class PersonDAOImpl implements PersonDAO {
                 person.setAddress(resultSet.getString("address"));
                 person.setPhone(resultSet.getString("phone"));
                 person.setAge(resultSet.getInt("age"));
-                person.setId(resultSet.getInt("id"));
                 person.setRole(resultSet.getString("role"));
 
                 close();
 
-                return person;
+
 
             }
         } catch (Exception e) {
             e.printStackTrace();
             e.getCause();
+            return null;
         }
-        return null;
+        return person;
     }
 
     /**
@@ -65,28 +65,38 @@ public class PersonDAOImpl implements PersonDAO {
      * @param person
      */
     @Override
-    public void insertRegisteredPerson(Person person) {
+    public int insertRegisteredPerson(Person person) {
 
         try {
             preparedStatement = connection.getConnection().prepareStatement
-                    ("insert into person(id,name,family,username,password,phone,address,age,role) values(?,?,?,?,?,?,?,?,?)");
+                    ("insert into person(name,family,username,password,phone,address,age,role) values(?,?,?,?,?,?,?,?)"
+                            , Statement.RETURN_GENERATED_KEYS);
 
-            preparedStatement.setInt(1, person.getId());
-            preparedStatement.setString(2, person.getName());
-            preparedStatement.setString(3, person.getFamily());
-            preparedStatement.setString(4, person.getUserName());
-            preparedStatement.setString(5, person.getPassword());
-            preparedStatement.setString(6, person.getPhone());
-            preparedStatement.setString(7, person.getAddress());
-            preparedStatement.setInt(8, person.getAge());
-            preparedStatement.setString(9, person.getRole());
+            preparedStatement.setString(1, person.getName());
+            preparedStatement.setString(2, person.getFamily());
+            preparedStatement.setString(3, person.getUserName());
+            preparedStatement.setString(4, person.getPassword());
+            preparedStatement.setString(5, person.getPhone());
+            preparedStatement.setString(6, person.getAddress());
+            preparedStatement.setInt(7, person.getAge());
+            preparedStatement.setString(8, person.getRole());
 
             preparedStatement.executeUpdate();
+
+                ResultSet keyResultSet = preparedStatement.getGeneratedKeys();
+                if (keyResultSet.next()) {
+                    Integer id = keyResultSet.getInt(1);
+                    //person.setId(id);
+                    // System.out.println(id);
+                }
+
+            close();
 
         } catch (Exception e) {
             e.printStackTrace();
             e.getCause();
         }
+        return 0;
     }
 
 }
