@@ -14,7 +14,8 @@
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="ojdbc8-full" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.15" level="project" />
-    <orderEntry type="library" name="Maven: com.oracle:ojdbc7:12.1.0.2" level="project" />
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.18" level="project" />
+    <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:3.6.1" level="project" />
     <orderEntry type="library" name="Maven: org.modelmapper:modelmapper:2.4.2" level="project" />
   </component>
 </module>

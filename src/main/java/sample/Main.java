@@ -113,11 +113,12 @@ public class Main extends Application {
             stage.close();
             stage = new Stage();
             stage.setTitle("Admin page");
-            stage.setScene(new Scene(root, 520, 600));
+            stage.setScene(new Scene(root));
             stage.show();
 
 
         }catch (Exception e){
+            e.getMessage();
             e.printStackTrace();
             e.getCause();
         }

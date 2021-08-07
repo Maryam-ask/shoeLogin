@@ -2,9 +2,8 @@ package com.controller;
 
 import com.model.da.PersonDAO;
 import com.model.da.PersonDAOImpl;
-import com.model.dto.ConvertDTO;
+import com.model.to.IdGenerator;
 import com.model.to.Person;
-import com.model.to.PersonProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,9 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import sample.Main;
 import sample.PasswordSecurity;
-
-
-
 
 import java.io.File;
 import java.net.URL;
@@ -101,12 +97,12 @@ public class RegisterController implements Initializable {
     @FXML
     public void registerButtonOnAction(ActionEvent event) {
         if (setPasswordField.getText().equals(confirmPasswordField.getText())) {
-            registerUser();
             confirmedPasswordLabel.setText("Password is set!");
+            registerUser();
             registrationMessageLabel.setText("User has been registered successfully!");
             //Main main = new Main();
             if(person.getRole().equals("Customer")) {
-                getMain().shoeTableView(getPerson());//TODO set person object
+                getMain().shoeTableView(getPerson());
             }else if (person.getRole().equals("Admin")){
                 getMain().adminPageStage(getPerson());
             }
@@ -135,9 +131,10 @@ public class RegisterController implements Initializable {
      * and add this information to person Object
      * and insert person to the database with PersonDAO object and method insertRegisteredPerson(Person).
      */
-    public void registerUser() { // inja bayad PersonProperty vared beshe va bad be Person mapping beshe
+    public void registerUser() {
         person = new Person();
 
+        person.setId(IdGenerator.generateUniqueId());
         person.setName(firstNameTextField.getText());
         person.setFamily(lastNameTextField.getText());
         person.setUserName(usernameTextField.getText());
@@ -145,18 +142,23 @@ public class RegisterController implements Initializable {
         person.setPhone(phoneNumberTextField.getText());
         person.setAddress(addressTextField.getText());
         //TODO if bithdate != null
-
-        person.setAge(getBirthdayDateToAge());
+        if (birthdayDatePicker.getValue()!= null) {
+            person.setAge(getBirthdayDateToAge());
+        }else {
+            person.setAge(1);
+        }
         person.setRole(getRole());
+
+
 
 
         PersonDAO personDAO = new PersonDAOImpl();
         personDAO.insertRegisteredPerson(person);
-
     }
 
     /**
      * a method to return the Person Object which declared in current Class
+     *
      * @return Person Object
      */
     public Person getPerson() {
@@ -165,6 +167,7 @@ public class RegisterController implements Initializable {
 
     /**
      * A method to set a person Object into the person object which declared in this Class.
+     *
      * @param person
      */
     public void setPerson(Person person) {
