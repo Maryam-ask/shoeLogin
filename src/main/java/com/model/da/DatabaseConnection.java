@@ -18,11 +18,11 @@ public class DatabaseConnection {
 
     public Connection getConnection() {
         String databaseUser = "maryam";
-        String databasePassword = "myjava12345";
-        String url = "jdbc:oracle:thin:@localhost:1521:xe";
+        String databasePassword = "mypython12345";
+        String url = "jdbc:mysql://localhost:3306/mydatabase";
 
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             databaseLink = DriverManager.getConnection(url, databaseUser, databasePassword);
 
         } catch (Exception e) {

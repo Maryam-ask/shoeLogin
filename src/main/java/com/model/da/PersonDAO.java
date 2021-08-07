@@ -2,6 +2,8 @@ package com.model.da;
 
 import com.model.to.Person;
 
+import java.util.List;
+
 /**
  * Created by Maryam Askari
  * Date: 5/21/2021
@@ -10,5 +12,6 @@ import com.model.to.Person;
  */
 public interface PersonDAO {
     public Person selectValidPerson(String userName, String password);
-    public int insertRegisteredPerson(Person person);
+    public void insertRegisteredPerson(Person person);
+    public List<Person> selectPersonList();
 }
