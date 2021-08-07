@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="labelImage" nodeOrientation="LEFT_TO_RIGHT" prefHeight="600.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controller.AdminPageController">
+<AnchorPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="600.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controller.AdminPageController">
    <children>
       <AnchorPane prefHeight="81.0" prefWidth="604.0" style="-fx-background-color: #ffd2da;">
          <children>
-            <ImageView fitHeight="67.0" fitWidth="83.0" layoutX="14.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="labelImage" fitHeight="67.0" fitWidth="83.0" layoutX="14.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../Images/shieldShoeLogo.jpg" />
                </image>
@@ -23,5 +24,39 @@
             </Label>
          </children>
       </AnchorPane>
+      <TableView fx:id="personTable" layoutX="17.0" layoutY="131.0" prefHeight="221.0" prefWidth="569.0">
+        <columns>
+          <TableColumn fx:id="p_idColumn" prefWidth="40.0" text="ID" />
+          <TableColumn fx:id="p_nameColumn" prefWidth="47.999961853027344" text="Name" />
+            <TableColumn fx:id="p_familyColumn" prefWidth="75.0" text="Family" />
+            <TableColumn fx:id="p_usernameColumn" prefWidth="84.00001525878906" text="username" />
+            <TableColumn fx:id="p_ageColumn" prefWidth="37.33331298828125" text="Age" />
+            <TableColumn fx:id="p_addressColumn" prefWidth="135.3333740234375" text="Address" />
+            <TableColumn fx:id="p_phoneNumberColumn" prefWidth="103.99996948242188" text="Phone Number" />
+            <TableColumn fx:id="p_selectColumn" prefWidth="42.66668701171875" text="Select" />
+        </columns>
+      </TableView>
+      <TableView fx:id="shoeTable" layoutX="16.0" layoutY="400.0" prefHeight="191.0" prefWidth="577.0">
+        <columns>
+          <TableColumn fx:id="sh_idColumn" prefWidth="55.33334541320801" text="ID" />
+          <TableColumn fx:id="sh_nameColumn" prefWidth="82.66667938232422" text="Name" />
+            <TableColumn fx:id="sh_colorColumn" prefWidth="72.66665649414062" text="Color" />
+            <TableColumn fx:id="sh_sizeColumn" prefWidth="79.33332824707031" text="Size" />
+            <TableColumn fx:id="sh_brandColumn" prefWidth="72.0" text="Brand" />
+            <TableColumn fx:id="sh_typeColumn" prefWidth="72.66668701171875" text="Type" />
+            <TableColumn fx:id="sh_priseColumn" prefWidth="94.66665649414062" text="Prise" />
+            <TableColumn fx:id="sh_selectColumn" prefWidth="39.3333740234375" text="Select" />
+        </columns>
+      </TableView>
+      <Label layoutX="17.0" layoutY="95.0" prefHeight="35.0" prefWidth="161.0" text="List of persons">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="17.0" layoutY="352.0" prefHeight="35.0" prefWidth="161.0" text="List of shoes">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

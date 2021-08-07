@@ -1,5 +1,8 @@
 package com.model.to;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 /**
  * Created by Maryam Askari
  * Date: 5/19/2021
@@ -18,9 +21,23 @@ public class Person {
     private int age;
     private String role;
 
+    private BooleanProperty selectable=new SimpleBooleanProperty(false);
+
+    public boolean getSelectable() {
+        return selectable.get();
+    }
+    public void setSelectable(boolean selectable) {
+        this.selectable.set(selectable);
+    }
+    public BooleanProperty selectableProperty() {
+        return selectable;
+    }
+
     public Person(){}
 
-    public Person(String name, String family, String userName, String password, String address, String phone, int age, String role) {
+    /*public Person(int id, String name, String family, String userName,
+                  String password, String address, String phone, int age, String role) {
+        this.id = id;
         this.name = name;
         this.family = family;
         this.userName = userName;
@@ -30,6 +47,8 @@ public class Person {
         this.age = age;
         this.role = role;
     }
+
+     */
 
     public int getId() {
         return id;
@@ -102,4 +121,22 @@ public class Person {
     public void setRole(String role) {
         this.role = role;
     }
+
+/*
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", name=" + name + '\n' +
+                ", family=" + family + '\n' +
+                ", userName=" + userName + '\n' +
+                ", password=" + password + '\n' +
+                ", address=" + address + '\n' +
+                ", phone=" + phone + '\n' +
+                ", age=" + age +'\n'+
+                ", role=" + role + '\n' +
+                "}";
+    }
+
+ */
+
 }
