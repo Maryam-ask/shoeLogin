@@ -38,6 +38,8 @@ public class RegisterController implements Initializable {
     @FXML
     private Label confirmedPasswordLabel;
     @FXML
+    private Label userNameCheckMessage;
+    @FXML
     private TextField firstNameTextField;
     @FXML
     private TextField lastNameTextField;
@@ -96,19 +98,23 @@ public class RegisterController implements Initializable {
      */
     @FXML
     public void registerButtonOnAction(ActionEvent event) {
-        if (setPasswordField.getText().equals(confirmPasswordField.getText())) {
-            confirmedPasswordLabel.setText("Password is set!");
-            registerUser();
-            registrationMessageLabel.setText("User has been registered successfully!");
-            //Main main = new Main();
-            if(person.getRole().equals("Customer")) {
-                getMain().shoeTableView(getPerson());
-            }else if (person.getRole().equals("Admin")){
-                getMain().adminPageStage(getPerson());
-            }
+        if(! new PersonDAOImpl().userNameCheck(usernameTextField.getText())) {
+            if (setPasswordField.getText().equals(confirmPasswordField.getText())) {
+                confirmedPasswordLabel.setText("Password is set!");
+                registerUser();
+                registrationMessageLabel.setText("User has been registered successfully!");
+                //Main main = new Main();
+                if (person.getRole().equals("Customer")) {
+                    getMain().shoeTableView(getPerson());
+                } else if (person.getRole().equals("Admin")) {
+                    getMain().adminPageStage(getPerson());
+                }
 
-        } else {
-            confirmedPasswordLabel.setText("Password does not match!");
+            } else {
+                confirmedPasswordLabel.setText("Password does not match!");
+            }
+        }else {
+            userNameCheckMessage.setText("This username already exist!");
         }
 
     }

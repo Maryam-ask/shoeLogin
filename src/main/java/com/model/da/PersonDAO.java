@@ -14,4 +14,5 @@ public interface PersonDAO {
     public Person selectValidPerson(String userName, String password);
     public void insertRegisteredPerson(Person person);
     public List<Person> selectPersonList();
+    public boolean userNameCheck(String username);
 }

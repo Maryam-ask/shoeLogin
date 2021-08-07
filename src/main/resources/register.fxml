@@ -112,5 +112,10 @@
             <RadioButton fx:id="adminButton" mnemonicParsing="false" onAction="#getRole" text="Admin" toggleGroup="$role" />
          </children>
       </HBox>
+      <Label fx:id="userNameCheckMessage" layoutX="140.0" layoutY="202.0" prefHeight="17.0" prefWidth="268.0" textFill="#d20c0c">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

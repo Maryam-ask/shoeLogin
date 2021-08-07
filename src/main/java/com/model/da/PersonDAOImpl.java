@@ -46,7 +46,7 @@ public class PersonDAOImpl implements PersonDAO {
 
         try {
             preparedStatement = connection.getConnection().prepareStatement
-                    ("select * from person where username='" + userName + "'and user_password ='" + password + "'");
+                    ("select * from person where username='" + userName.toLowerCase() + "'and user_password ='" + password + "'");
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
@@ -84,7 +84,7 @@ public class PersonDAOImpl implements PersonDAO {
             preparedStatement.setInt(1, person.getId());
             preparedStatement.setString(2, person.getName());
             preparedStatement.setString(3, person.getFamily());
-            preparedStatement.setString(4, person.getUserName());
+            preparedStatement.setString(4, person.getUserName().toLowerCase());
             preparedStatement.setString(5, person.getPassword());
             preparedStatement.setString(6, person.getPhone());
             preparedStatement.setString(7, person.getAddress());
@@ -103,6 +103,12 @@ public class PersonDAOImpl implements PersonDAO {
         }
 
     }
+
+
+    /**
+     * A method witch read all person table from database and
+     * @return a list af exist persons in database
+     */
 
     @Override
     public List<Person> selectPersonList() {
@@ -130,6 +136,37 @@ public class PersonDAOImpl implements PersonDAO {
 
         return personsList;
     }
+
+    @Override
+    public boolean userNameCheck(String username) {
+
+        boolean usernameExist = false;
+
+        try {
+            preparedStatement = connection.getConnection().
+                    prepareStatement("select * from person where username=?");
+            preparedStatement.setString(1, username.toLowerCase().trim());
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                usernameExist = true;
+            }
+
+        }catch (SQLException ex){
+            ex.getCause();
+            ex.printStackTrace();
+            ex.getMessage();
+        }
+        return usernameExist;
+    }
+
+
+    /**
+     * A method to set person's data in resultSet in database
+     * @param resultSet
+     * @return person information from database
+     * @throws SQLException
+     */
 
     public Person setPerson(ResultSet resultSet) throws SQLException {
         Person person = new Person();
