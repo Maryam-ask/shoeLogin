@@ -49,7 +49,7 @@ public class ShoesTableController implements Initializable {
     @FXML
     private TableView<Shoe> shoeTableView;
     @FXML
-    private TableColumn<Shoe, Long> shoeIdColumn;
+    private TableColumn<Shoe, Integer> shoeIdColumn;
     @FXML
     private TableColumn<Shoe, String> shoeNameColumn;
     @FXML
@@ -102,7 +102,7 @@ public class ShoesTableController implements Initializable {
         //Adding ColumnsToTableView();
         addShoeToList();
 
-        shoeIdColumn.setCellValueFactory(new PropertyValueFactory<Shoe, Long>("id"));
+        shoeIdColumn.setCellValueFactory(new PropertyValueFactory<Shoe, Integer>("id"));
         shoeNameColumn.setCellValueFactory(new PropertyValueFactory<Shoe, String>("name"));
         shoeColorColumn.setCellValueFactory(new PropertyValueFactory<Shoe, String>("color"));
         shoeBrandColumn.setCellValueFactory(new PropertyValueFactory<Shoe, String>("brand"));

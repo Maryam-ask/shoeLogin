@@ -32,11 +32,11 @@ public class ShoeDAOImpl implements ShoeDAO{
 
             while (resultSet.next()){
                 Shoe shoe= new Shoe();
-                shoe.setId(resultSet.getLong("ID"));
+                shoe.setId(resultSet.getInt("ID"));
                 shoe.setName(resultSet.getString("NAME"));
                 shoe.setColor(resultSet.getString("COLOR"));
-                shoe.setType(resultSet.getString("SHOETYPE"));
-                shoe.setSize(resultSet.getInt("SHOESIZE"));
+                shoe.setType(resultSet.getString("TYPE"));
+                shoe.setSize(resultSet.getInt("SIZE"));
                 shoe.setBrand(resultSet.getString("BRAND"));
                 shoe.setPrise(resultSet.getDouble("PRISE"));
                 shoeList.add(shoe);

@@ -2,7 +2,6 @@ package com.controller;
 
 import com.model.da.PersonDAOImpl;
 import com.model.to.Person;
-import com.model.to.PersonProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,7 +43,6 @@ public class LoginController implements Initializable {
 
     private Person person;
 
-    private PersonProperty personProperty;
 
     /**
      * A method with function for the cancel button in FX.
@@ -78,15 +76,15 @@ public class LoginController implements Initializable {
             PersonDAOImpl personDAO = new PersonDAOImpl();
             person = personDAO.selectValidPerson(userName, password);
 
-            if (usernameTextField.getText().equals(person.getUserName()) && password.equals(person.getPassword())) {
+            if (userName.equals(person.getUserName()) && password.equals(person.getPassword())) {
                 if (person != null) {
 
                     loginMessageLabel.setText("congratulation!");
                     // Go to Shoes Table Page
-                    if (person.getRole().equals("Customer")){
-                    //Main.getStage().getScene().setUserData(person);
+                    if (person.getRole().equals("Customer")) {
+                        //Main.getStage().getScene().setUserData(person);
                         getMain().shoeTableView(person);
-                    }else if(person.getRole().equals("Admin")){
+                    } else if (person.getRole().equals("Admin")) {
                         getMain().adminPageStage(person);
                     }
 

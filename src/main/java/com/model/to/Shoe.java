@@ -12,7 +12,7 @@ import javafx.scene.layout.Border;
  * Project: IntelliJ IDEA
  */
 public class Shoe {
-    private long id;
+    private int id;
     private String name;
     private String color;
     private int size;
@@ -46,7 +46,7 @@ public class Shoe {
         this.selectable =new SimpleBooleanProperty(false);
     }
 
-    public Shoe(long id, String name, String color, int size, String brand, String type, double prise, BooleanProperty selectable) {
+    public Shoe(int id, String name, String color, int size, String brand, String type, double prise, BooleanProperty selectable) {
         this.id = id;
         this.name = name;
         this.color = color;
@@ -57,11 +57,11 @@ public class Shoe {
         this.selectable = selectable;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

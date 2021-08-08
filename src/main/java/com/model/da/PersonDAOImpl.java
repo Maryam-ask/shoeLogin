@@ -46,7 +46,9 @@ public class PersonDAOImpl implements PersonDAO {
 
         try {
             preparedStatement = connection.getConnection().prepareStatement
-                    ("select * from person where username='" + userName.toLowerCase() + "'and user_password ='" + password + "'");
+                    ("select * from person where username = ? and user_password = ?" );
+            preparedStatement.setString(1,userName.toLowerCase().trim());
+            preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
@@ -84,7 +86,7 @@ public class PersonDAOImpl implements PersonDAO {
             preparedStatement.setInt(1, person.getId());
             preparedStatement.setString(2, person.getName());
             preparedStatement.setString(3, person.getFamily());
-            preparedStatement.setString(4, person.getUserName().toLowerCase());
+            preparedStatement.setString(4, person.getUserName().toLowerCase().trim());
             preparedStatement.setString(5, person.getPassword());
             preparedStatement.setString(6, person.getPhone());
             preparedStatement.setString(7, person.getAddress());
