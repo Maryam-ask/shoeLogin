@@ -10,6 +10,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -17,9 +18,12 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+import sample.Main;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -30,6 +34,8 @@ import java.util.ResourceBundle;
  * Project: IntelliJ IDEA
  */
 public class AdminPageController implements Initializable {
+
+    private Main main;
     @FXML
     private ImageView labelImage;
     @FXML
@@ -90,6 +96,28 @@ public class AdminPageController implements Initializable {
         welcomeText.setText("Welcome " + person.getName() + "!");
     }
 
+    /**
+     * A method with function for the cancel button in FX.
+     * It will close the stage if we click on cancel button.
+     *
+     * @param event
+     */
+    public void cancelButtonOnAction(javafx.event.ActionEvent event) {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
+    }
+
+    /**
+     * A method which includes the functions for the back button.
+     * When we click on back button the stage in current class will go back to start stage.
+     * @param event
+     * @throws Exception
+     */
+    public void backToLoginButtonOnAction(ActionEvent event) throws Exception {
+        main.start(main.getStage());
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         File imageLogoFile = new File("Images/shieldShoeLogo.jpg");
@@ -106,7 +134,13 @@ public class AdminPageController implements Initializable {
 
     public void addPersonToObservableList(){
         PersonDAO personDAO = new PersonDAOImpl();
-        List <Person> personList = personDAO.selectPersonList();
+        List <Person> personList = new ArrayList<Person>();
+        for(Person p: personDAO.selectPersonList()){
+            if (p.getRole().equals("Customer")){
+                personList.add(p);
+            }
+        }
+
 
         personObservableList= FXCollections.observableArrayList(personList);
     }
@@ -195,5 +229,25 @@ public class AdminPageController implements Initializable {
 
     }
 
+    /**
+     * a method to return Main object which declared in current Class.
+     * @return MainClass Value
+     */
+    public Main getMain() {
+        return main;
+    }
 
+    /**
+     * A method to set a MainClass Object into MainClass object which declared in current Class.
+     * @param main
+     */
+    public void setMain(Main main) {
+        this.main = main;
+    }
+
+    public void editShoesButtonOnAction(ActionEvent event) {
+    }
+
+    public void editPersonsButtonOnAction(ActionEvent event) {
+    }
 }

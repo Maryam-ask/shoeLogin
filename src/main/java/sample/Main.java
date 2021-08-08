@@ -85,6 +85,7 @@ public class Main extends Application {
             //ShoesTableContoller shoeTable = loader.getController();
             //System.out.println(shoeTable.setWelcomeText());
             ShoesTableController shoeTable = loader.getController();
+            shoeTable.setMain(this);
            // shoeTable.setSelectedPerson((Person) stage.getScene().getUserData());
             //shoeTable.setSelectedPerson(person);
             shoeTable.setWelcomeText(person);
@@ -108,12 +109,13 @@ public class Main extends Application {
             Parent root = loader.load();
 
             AdminPageController adminPage = loader.getController();
+            adminPage.setMain(this);
             adminPage.setWelcomeText(person);
 
             stage.close();
             stage = new Stage();
             stage.setTitle("Admin page");
-            stage.setScene(new Scene(root));
+            stage.setScene(new Scene(root,604,620));
             stage.show();
 
 

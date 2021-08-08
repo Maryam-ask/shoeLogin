@@ -145,9 +145,17 @@ public class RegisterController implements Initializable {
         person.setFamily(lastNameTextField.getText());
         person.setUserName(usernameTextField.getText());
         person.setPassword(PasswordSecurity.shaHashing(setPasswordField.getText()));
-        person.setPhone(phoneNumberTextField.getText());
-        person.setAddress(addressTextField.getText());
-        //TODO if bithdate != null
+        if (! phoneNumberTextField.getText().isBlank()) {
+            person.setPhone(phoneNumberTextField.getText());
+        }else{
+            person.setPhone("");
+        }
+
+        if (! addressTextField.getText().isBlank()){
+            person.setAddress(addressTextField.getText());
+        }else {
+            person.setAddress("");
+        }
         if (birthdayDatePicker.getValue()!= null) {
             person.setAge(getBirthdayDateToAge());
         }else {
