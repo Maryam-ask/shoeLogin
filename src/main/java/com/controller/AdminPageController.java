@@ -2,6 +2,8 @@ package com.controller;
 
 import com.model.da.PersonDAO;
 import com.model.da.PersonDAOImpl;
+import com.model.da.ShoeDAO;
+import com.model.da.ShoeDAOImpl;
 import com.model.to.Person;
 import com.model.to.Shoe;
 import javafx.beans.value.ChangeListener;
@@ -10,10 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -35,6 +34,14 @@ public class AdminPageController implements Initializable {
     private ImageView labelImage;
     @FXML
     private Label welcomeText;
+    @FXML
+    private Button editPersonsButton;
+    @FXML
+    private Button editShoesButton;
+    @FXML
+    private Button cancelButton;
+    @FXML
+    private Button backToLoginButton;
     @FXML
     private TableView<Person> personTable;
     @FXML
@@ -89,7 +96,7 @@ public class AdminPageController implements Initializable {
         Image imageLogo = new Image(imageLogoFile.toURI().toString());
         labelImage.setImage(imageLogo);
 
-        addPersonList();
+        addPersonToObservableList();
         fillPersonTableColumns();
 
     }
@@ -97,7 +104,7 @@ public class AdminPageController implements Initializable {
 
 
 
-    public void addPersonList(){
+    public void addPersonToObservableList(){
         PersonDAO personDAO = new PersonDAOImpl();
         List <Person> personList = personDAO.selectPersonList();
 
@@ -143,6 +150,49 @@ public class AdminPageController implements Initializable {
         personTable.setEditable(true);
 
         personTable.setItems(personObservableList);
+    }
+
+
+    public void addShoesToObservableList(){
+        ShoeDAO shoeDAO = new ShoeDAOImpl();
+        List<Shoe> shoesList = shoeDAO.selectShoes();
+        shoesObservableList = FXCollections.observableArrayList(shoesList);
+    }
+
+    public void fillShoeTableColumn(){
+        sh_idColumn.setCellValueFactory(new PropertyValueFactory<Shoe, Integer>("id"));
+        sh_nameColumn.setCellValueFactory(new PropertyValueFactory<Shoe,String>("name"));
+        sh_colorColumn.setCellValueFactory(new PropertyValueFactory<Shoe, String>("color"));
+        sh_typeColumn.setCellValueFactory(new PropertyValueFactory<Shoe, String>("type"));
+        sh_brandColumn.setCellValueFactory(new PropertyValueFactory<Shoe, String>("brand"));
+        sh_sizeColumn.setCellValueFactory(new PropertyValueFactory<Shoe,Integer>("size"));
+        sh_priseColumn.setCellValueFactory(new PropertyValueFactory<Shoe, Double>("prise"));
+        sh_selectColumn.setCellValueFactory(new PropertyValueFactory<Shoe, Boolean>("selectable"));
+        sh_selectColumn.setCellFactory(CheckBoxTableCell.forTableColumn(sh_selectColumn));
+
+        CheckBox select_all = new CheckBox();
+        select_all.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            public void changed(ObservableValue<? extends Boolean> ov,
+                                Boolean old_val, Boolean new_val) {
+                if (new_val) {
+                    for (Shoe sh : shoesObservableList) {
+                        sh.setSelectable(true);
+                    }
+
+                } else {
+                    for (Shoe sh : shoesObservableList) {
+                        sh.setSelectable(false);
+                    }
+                }
+
+
+            }
+        });
+        sh_selectColumn.setGraphic(select_all);
+        sh_selectColumn.setEditable(true);
+        shoeTable.setEditable(true);
+
+
     }
 
 
