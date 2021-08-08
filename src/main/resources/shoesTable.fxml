@@ -43,7 +43,8 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="addToBagButton" layoutX="301.0" layoutY="560.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Add to bag" />
+      <Button fx:id="addToBagButton" layoutX="397.0" layoutY="560.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Add to bag" />
       <Button fx:id="cancelButton" layoutX="50.0" layoutY="560.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="25.0" prefWidth="66.0" text="cancel" />
+      <Button fx:id="backToLonginButton" layoutX="142.0" layoutY="560.0" mnemonicParsing="false" onAction="#backToLonginButtonOnAction" text="Back to Login" />
    </children>
 </AnchorPane>

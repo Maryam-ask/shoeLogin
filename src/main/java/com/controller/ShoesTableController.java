@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import sample.Main;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,6 +44,8 @@ public class ShoesTableController implements Initializable {
     @FXML
     private Button cancelButton;
     @FXML
+    private Button backToLonginButton;
+    @FXML
     private ImageView labelImage;
     @FXML
     private Label welcomeText;
@@ -64,6 +67,16 @@ public class ShoesTableController implements Initializable {
     private TableColumn<Shoe, Double> shoePriseColumn;
     @FXML
     private TableColumn<Shoe, Boolean> selectedCol;
+
+    public Main getMain() {
+        return main;
+    }
+
+    public void setMain(Main main) {
+        this.main = main;
+    }
+
+    private Main main;
     // @FXML
     //private TableColumn shoeCheckBoxColumn;
 
@@ -77,6 +90,10 @@ public class ShoesTableController implements Initializable {
     public void cancelButtonOnAction(ActionEvent event) { // the cancel button and its action
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
+    }
+
+    public void backToLonginButtonOnAction(ActionEvent event) throws Exception {
+        main.start(main.getStage());
     }
 
     public void setWelcomeText(Person person) throws IOException {
@@ -161,6 +178,5 @@ public class ShoesTableController implements Initializable {
         list.add(s4);
         shoeList = FXCollections.observableArrayList(list);
     }
-
 
 }
